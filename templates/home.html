@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block custom_css %}
+<link rel="stylesheet" href="{% static 'css/home_style.css' %}">
+{% endblock custom_css %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div id="home-content">
+                <h1>Quote of the Day</h1>
+                <h3 id="quote_placeholder"></h3>
+                <em><h5 id="author_placeholder"></h5></em>
+                <hr>
+                <a class="btn btn-light btn-lg" href="{% url 'polls:list' %}" role="button">Go to Polls</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    const quotes = [
+        'Somewhere inside all of us is the power to change the world', 
+        'Talk is cheap, voting is free; take it to the polls.', 
+        'The ballot is stronger than the bullet.', 
+        'To succeed in life, you need two things: ignorance and confidence.', 
+        'Impossible is just an opinion', 
+        'If light is in your heart, you will find your way home.', 
+        'Have the courage to follow your heart and intuition. They somehow know what you truly want to become.', 
+        "Life isn't about finding yourself. Life is about creating yourself."
+    ]
+    const author = [
+        'Roald Dahl', 
+        'Nanette L. Avery', 
+        'Abraham Lincoln', 
+        'Mark Twain', 
+        'Paulo Coehlo', 
+        'Rumi', 
+        'Steve Jobs', 
+        'George Bernard Shaw'
+    ]
+
+    function random_quotes(quotes, author) {
+            var ind = Math.floor(Math.random() * quotes.length)
+            return [quotes[ind], author[ind]];
+        }
+    var select_q;
+    var select_a; 
+    [select_q, select_a] = random_quotes(quotes, author)
+    console.log(select_q)
+    console.log(select_a)
+    document.getElementById("quote_placeholder").innerHTML = '"'+select_q+'"';
+    document.getElementById("author_placeholder").innerHTML = "~"+select_a;
+</script>
+{% endblock content %}
